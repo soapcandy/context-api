@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import ColorBox from "./components/ColorBox";
+import SelectBox from "./components/SelectBox";
+import ColorBoxContext from "./contexts/ColorBoxContext";
 
 function App() {
+  const [color, setColor] = useState("gray");
+  const [subcolor, setSubcolor] = useState("pink");
+
+  console.log(color);
+
+  const value = {
+    state: { color, subcolor },
+    actions: { setColor, setSubcolor },
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorBoxContext.Provider value={value}>
+      <SelectBox />
+      <ColorBox />
+    </ColorBoxContext.Provider>
   );
 }
 
